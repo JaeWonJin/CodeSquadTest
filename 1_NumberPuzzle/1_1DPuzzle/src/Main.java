@@ -1,11 +1,11 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Main {
 
     static int N = 8;
     static int[] Board = new int[N];
-    static int[] OutputArr = new int[2];
     static
     {
         for(int i = 0; i < N; ++i) Board[i] = i + 1;
@@ -37,11 +37,10 @@ public class Main {
         return true;
     }
 
-    public static boolean ParseInt(String _Str, int[] _Out)
+    public static boolean ParseInt(String _Str, ArrayList<Integer> _Out)
     {
         boolean bReadingNumber = false;
         int Value = 0;
-        int CurIdx = 0;
         int Length = _Str.length();
         for(int i = 0; i < Length; ++i)
         {
@@ -61,13 +60,12 @@ public class Main {
                     // 숫자 읽는 중이 아닐 경우
                     if(!bReadingNumber) return false;
 
-                    _Out[CurIdx] = Value;
+                    _Out.add(Value);
                     Value = 0;
-                    CurIdx += 1;
                     bReadingNumber = false;
 
                     // 숫자 2개 초과
-                    if(CurIdx > 1) return false;
+                    if(_Out.size() > 1) return false;
 
                     // 콤마 뒤 공백은 허용
                     if(i + 1 < Length && _Str.charAt(i + 1) == ' ') ++i;
@@ -81,7 +79,7 @@ public class Main {
         }
         // 마지막 숫자 저장
         if(!bReadingNumber) return false;
-        _Out[CurIdx] = Value;
+        _Out.add(Value);
 
         return true;
     }
@@ -95,6 +93,7 @@ public class Main {
         System.out.print("간단 숫자 퍼즐\n");
         while(true)
         {
+            ArrayList<Integer> vecOutput = new ArrayList<>();
             if(bTurnChanged)
             {
                 System.out.printf("Turn %d\n", Turn);
@@ -109,9 +108,9 @@ public class Main {
 
             System.out.print("교환할 두 숫자를 입력>\n");
             String Input = sc.nextLine();
-            if (ParseInt(Input, OutputArr))
+            if (ParseInt(Input, vecOutput))
             {
-                Swap_Arr(Board, OutputArr[0] - 1, OutputArr[1] - 1);
+                Swap_Arr(Board, vecOutput.get(0) - 1, vecOutput.get(1) - 1);
                 if(CheckBoardFinished(Board, N))
                 {
                     System.out.printf("축하합니다! %d턴만에 퍼즐을 완성하셨습니다!", Turn);
