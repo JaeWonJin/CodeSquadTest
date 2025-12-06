@@ -13,6 +13,7 @@ public class Main {
 
     public static void Swap_Arr(int[] _Arr, int _i, int _j)
     {
+
         int temp = _Arr[_i];
         _Arr[_i] = _Arr[_j];
         _Arr[_j] = temp;
@@ -104,6 +105,13 @@ public class Main {
                     if(i < N - 1) System.out.print(", ");
                 }
                 System.out.print("]\n");
+
+                if(CheckBoardFinished(Board, N))
+                {
+                    System.out.printf("축하합니다! %d턴만에 퍼즐을 완성하셨습니다!", Turn);
+                    break;
+                }
+                ++Turn;
             }
 
             System.out.print("교환할 두 숫자를 입력>\n");
@@ -111,12 +119,6 @@ public class Main {
             if (ParseInt(Input, vecOutput))
             {
                 Swap_Arr(Board, vecOutput.get(0) - 1, vecOutput.get(1) - 1);
-                if(CheckBoardFinished(Board, N))
-                {
-                    System.out.printf("축하합니다! %d턴만에 퍼즐을 완성하셨습니다!", Turn);
-                    break;
-                }
-                ++Turn;
                 bTurnChanged = true;
             }
             else
