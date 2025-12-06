@@ -106,6 +106,6 @@ public class Board
 
     public void Merge(DIR _Dir)
     {
-        
+
     }
 }
