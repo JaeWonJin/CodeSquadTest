@@ -1,16 +1,20 @@
 public enum DIR
 {
-    UP(0, -1),
-    DOWN(0, 1),
-    LEFT(-1, 0),
-    RIGHT(1, 0);
+    UP(0),
+    DOWN(1),
+    LEFT(2),
+    RIGHT(3),
+    END(4);
 
-    public final int dx;
-    public final int dy;
+    private final int value;
 
-    DIR(int dx, int dy)
+    DIR(int _value)
     {
-        this.dx = dx;
-        this.dy = dy;
+        this.value = _value;
+    }
+
+    public int getValue()
+    {
+        return value;
     }
 }

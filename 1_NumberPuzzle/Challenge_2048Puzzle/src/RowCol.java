@@ -9,6 +9,16 @@ public class RowCol
         col = _Col;
     }
 
+    public RowCol add(RowCol _Other)
+    {
+        return new RowCol(row + _Other.row, col + _Other.col);
+    }
+    public void copy(RowCol _Src)
+    {
+        row = _Src.row;
+        col = _Src.col;
+    }
+
     @Override
     public boolean equals(Object _Obj)
     {
