@@ -17,7 +17,7 @@ public class Main
         {
             if(bTurnChanged)
             {
-                // Todo : 게임 종료 조건 검사
+                // 게임 종료 조건 검사
                 if(bCompleted)
                 {
                     System.out.printf("축하합니다! %d턴만에 퍼즐을 완성하셨습니다!", Turn);
