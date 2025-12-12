@@ -1,5 +1,19 @@
 public class RowCol
 {
+    static final int DIR_UP     = 0;
+    static final int DIR_DOWN   = 1;
+    static final int DIR_LEFT   = 2;
+    static final int DIR_RIGHT  = 3;
+    static final int DIR_END    = 4;
+
+    static final RowCol[] DIR_ROWCOLS   = new RowCol[]{
+                    new RowCol(-1, 0),
+                    new RowCol(1, 0),
+                    new RowCol(0, -1),
+                    new RowCol(0, 1),
+            };
+
+
     public int row;
     public int col;
 
