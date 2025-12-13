@@ -130,6 +130,11 @@ public class Stage
         return ORDER_MOVE_FAIL;
     }
 
+    public boolean IsGameFinished()
+    {
+        return HallCnt == BallInHallCnt;
+    }
+
     private boolean IsValid(RowCol _Pos)
     {
         return (_Pos.row >= 0 && _Pos.row < MaxRow && _Pos.col >= 0 && _Pos.col < MaxCol);
@@ -165,6 +170,13 @@ public class Stage
         {
             PlayerPos.row = _Dest.row;
             PlayerPos.col = _Dest.col;
+        }
+        if(Obj == OBJ_BALL)
+        {
+            int StartTile = TileInfo & MASK_TILE;
+            int DestTile = DestTileInfo & MASK_TILE;
+            if(StartTile == TILE_HALL && DestTile != TILE_HALL) --BallInHallCnt;
+            else if(StartTile != TILE_HALL && DestTile == TILE_HALL) ++BallInHallCnt;
         }
     }
     private boolean PlayerMove(RowCol _Dir)

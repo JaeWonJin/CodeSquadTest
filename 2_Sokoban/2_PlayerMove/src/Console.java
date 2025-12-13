@@ -56,6 +56,12 @@ public class Console
                 {
                     System.out.print(stage.toString());
                     System.out.print("\n");
+                    if(stage.IsGameFinished())
+                    {
+                        System.out.print("축하합니다 ! 게임을 클리어 하셨습니다 !\n\n");
+                        result = Stage.ORDER_QUIT;
+                        break;
+                    }
                 }
             }
             if(result == Stage.ORDER_QUIT)
