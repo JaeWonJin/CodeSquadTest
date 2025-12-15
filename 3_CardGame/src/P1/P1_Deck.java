@@ -1,3 +1,5 @@
+package P1;
+
 import java.util.Random;
 
 public class P1_Deck
