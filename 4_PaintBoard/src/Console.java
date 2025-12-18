@@ -49,6 +49,22 @@ public class Console
                 if(bDrawSucess) System.out.print(paintBoard.toString());
                 else System.out.print("잘못 입력하셨습니다.\n");
             }
+            else if(Command == InputParser.CMD_SAVE_BOARD)
+            {
+                boolean bSaveSucess = FileMgr.GetInst().Save(drawInfo.RelativePath, paintBoard);
+                if(bSaveSucess) System.out.print("저장에 성공하셨습니다.\n");
+                else System.out.print("잘못 입력하셨습니다.\n");
+            }
+            else if(Command == InputParser.CMD_LOAD_BOARD)
+            {
+                boolean bLoadSucess = FileMgr.GetInst().Load(drawInfo.RelativePath, paintBoard);
+                if(bLoadSucess)
+                {
+                    System.out.print(paintBoard.toString());
+                    System.out.print("로드에 성공하셨습니다.\n");
+                }
+                else System.out.print("잘못 입력하셨습니다.\n");
+            }
         }
     }
 }

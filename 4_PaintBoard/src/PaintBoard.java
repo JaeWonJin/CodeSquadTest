@@ -37,10 +37,11 @@ public class PaintBoard
         return (toNext > toDest);
     }
 
-    public void SetBoard(Vec2 _Pos, char _c)
-    {
-        Board[_Pos.GetY()][_Pos.GetX()] = _c;
-    }
+    public void SetBoard(int _Row, int _Col, char _c){ Board[_Row][_Col] = _c; }
+
+    public void SetBoard(Vec2 _Pos, char _c) {SetBoard(_Pos.GetY(), _Pos.GetX(), _c);}
+
+    public char GetBoard(int _Row, int _Col){ return Board[_Row][_Col]; }
 
     public boolean DrawRect(Vec2 _Start, Vec2 _End, char _c)
     {
@@ -51,7 +52,7 @@ public class PaintBoard
         {
             for(int j = _Start.GetX(); j <= _End.GetX(); j += StepX)
             {
-                Board[i][j] = _c;
+                SetBoard(i, j, _c);
             }
         }
         return true;
@@ -69,7 +70,7 @@ public class PaintBoard
                 int DistSquare = (_Center.GetX() - j) * (_Center.GetX() - j) + (_Center.GetY() - i) * (_Center.GetY() - i);
                 if(DistSquare <= RadiusSquare)
                 {
-                    Board[i][j] = _c;
+                    SetBoard(i, j, _c);
                 }
             }
         }

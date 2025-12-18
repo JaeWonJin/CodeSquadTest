@@ -7,16 +7,20 @@ public class InputParser
     public static final int CMD_DRAW_CIRCLE     = 2;
     public static final int CMD_DRAW_RECT       = 3;
     public static final int CMD_QUIT            = 4;
-    public static final int CMD_WRONG_INPUT     = 5;
+    public static final int CMD_SAVE_BOARD      = 5;
+    public static final int CMD_LOAD_BOARD      = 6;
+    public static final int CMD_WRONG_INPUT     = 7;
 
-    public static final String[] strCommands = new String[]{"help", "line", "circle", "rect", "quit"};
+    public static final String[] strCommands = new String[]{"help", "line", "circle", "rect", "quit", "save", "load"};
     public static final String[] strCommandTultips = new String[]
             {
                     ": 도움말, 지금 이 화면을 출력한다.",
                     " x1, y1, x2, y2, m: 두 좌표를 지정한 모양으로 잇는 선을 그린다.",
                     " x, y, r, m: x,y 를 중점으로 하는 반지름 r인 원을 그린다.",
                     " x1, y1, x2, y2, m: 두 좌표를 양 끝점으로 하는 직사각형을 그린다.",
-                    ": 프로그램을 종료한다."
+                    ": 프로그램을 종료한다.",
+                    " filename: 파일을 저장한다.",
+                    " filename: 파일을 불러온다.",
             };
 
     public StringBuilder sbDesc = new StringBuilder();
@@ -100,6 +104,21 @@ public class InputParser
             if(_Info.c != '\0') return CMD_DRAW_RECT;
         }
 
+        if(_StrInput.startsWith(strCommands[CMD_SAVE_BOARD]))
+        {
+            int Offset = strCommands[CMD_SAVE_BOARD].length();
+            String RelativePath = FileMgr.GetInst().CheckExt(_StrInput.substring(Offset + 1), ".txt");
+            _Info.RelativePath = RelativePath;
+            return CMD_SAVE_BOARD;
+        }
+        if(_StrInput.startsWith(strCommands[CMD_LOAD_BOARD]))
+        {
+            int Offset = strCommands[CMD_LOAD_BOARD].length();
+            String RelativePath = FileMgr.GetInst().CheckExt(_StrInput.substring(Offset + 1), ".txt");
+            _Info.RelativePath = RelativePath;
+            return CMD_LOAD_BOARD;
+        }
+
         return CMD_WRONG_INPUT;
     }
 
@@ -112,7 +131,7 @@ public class InputParser
     }
     private InputParser()
     {
-        for(int i = 0; i <= CMD_QUIT; ++i)
+        for(int i = 0; i < strCommandTultips.length; ++i)
         {
             sbDesc.append(strCommands[i]);
             sbDesc.append(strCommandTultips[i]);
